@@ -11,6 +11,6 @@ services:
     environment:
       PYTHONUNBUFFERED: 'true'
     volumes:
-      - './arcana'
+      - '.:/arcana'
     ports:
       - '8000:8000'
