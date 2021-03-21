@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description"
           content="{% block meta_description %}{% endblock %}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{% block title %}{% endblock %}</title>
 
@@ -52,6 +53,7 @@
       <div class="container">
         <ul class="list-inline">
           <li class="text-muted">Snake Eyes &copy; 2016</li>
+          <li><a href="{{ url_for('contact.index') }}">Contact</a></li>
           <li><a href="{{ url_for('page.privacy') }}">Privacy Policy</a></li>
           <li><a href="{{ url_for('page.terms') }}">Terms of Service</a></li>
         </ul>
