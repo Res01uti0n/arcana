@@ -1,7 +1,10 @@
-FROM python:3.7-alpine
-MAINTAINER @resolution
+FROM python:2.7-slim
+MAINTAINER Nick Janetakis <nick.janetakis@gmail.com>
 
-ENV INSTALL_PATH /arcana
+RUN apt-get update && apt-get install -qq -y \
+  build-essential libpq-dev --no-install-recommends
+
+ENV INSTALL_PATH /snakeeyes
 RUN mkdir -p $INSTALL_PATH
 
 WORKDIR $INSTALL_PATH
@@ -12,4 +15,4 @@ RUN pip install -r requirements.txt
 COPY . .
 RUN pip install --editable .
 
-CMD gunicorn -b 0.0.0.0:8000 --access-logfile - "arcana.app:create_app()"
+CMD gunicorn -c "python:config.gunicorn" "snakeeyes.app:create_app()"
